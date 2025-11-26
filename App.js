@@ -1,45 +1,55 @@
-import { useState } from "react";
-import {ScrollView, StyleSheet, View} from "react-native";
-
-import Header from "./body/header";
-import Main from "./body/main";
-import Footer from "./body/footer";
-
-import { sortearNumero } from "./services/randomNumbers";
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
+import { AuthProvider } from './src/contexts/authContext';
+import Navigation from './src/routes/navigation';
+import { initDatabase } from './src/services/database';
 
 export default function App() {
-  const [numero, setNumero] = useState(null);
-  const [historico, setHistorico] = useState([]);
+    const [dbInitialized, setDbInitialized] = useState(false);
 
-  function handleSortear(min, max) {
-    try {
-      const sorteado = sortearNumero(min, max);
-      setNumero(sorteado);
-      setHistorico((prev) => [...prev, sorteado]); // adiciona ao histórico
-    } catch (e) {
-      console.warn(e.message);
+    useEffect(() => {
+        initDatabase()
+            .then(() => {
+                console.log('Banco de dados inicializado!');
+                setDbInitialized(true);
+            })
+            .catch((error) => {
+                console.error('Erro ao inicializar banco:', error);
+            });
+    }, []);
+
+    if (!dbInitialized) {
+        return (
+            <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color="#3772FF" />
+                <Text style={styles.loadingText}>Inicializando...</Text>
+            </View>
+        );
     }
-  }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Header />
-            <View style={styles.content}>
-                <Main numero={numero} />
+        <AuthProvider>
+            <View style={styles.container}>
+                <Navigation />
             </View>
-                <Footer onSortear={handleSortear} historico={historico} />
-        </ScrollView>
+        </AuthProvider>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#0D0D0D",
+        backgroundColor: '#0D0D0D',
     },
-    content: {
-        flex: 1, // ocupa o espaço do meio
-        justifyContent: "center",
-        alignItems: "center",
+    loadingContainer: {
+        flex: 1,
+        backgroundColor: '#0D0D0D',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    loadingText: {
+        color: '#F2F2EB',
+        marginTop: 10,
+        fontSize: 16,
     },
 });

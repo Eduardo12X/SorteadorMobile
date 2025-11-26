@@ -3,18 +3,70 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "expo start",
+    "start": "node --max-old-space-size=4096 node_modules/.bin/expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~54.0.12",
+    "@expo-google-fonts/poppins": "^0.2.3",
+    "@react-native-async-storage/async-storage": "~2.2.0",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/drawer": "^6.6.6",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "expo": "~54.0.25",
+    "expo-auth-session": "^7.0.9",
+    "expo-font": "~14.0.9",
+    "expo-linking": "~8.0.9",
+    "expo-sqlite": "^16.0.9",
     "expo-status-bar": "~3.0.8",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-native": "0.81.4",
-    "react-native-web": "^0.21.1"
+    "expo-web-browser": "^15.0.9",
+    "firebase": "^12.6.0",
+    "react": "~19.1.0",
+    "react-dom": "~19.1.0",
+    "react-native": "~0.82.1",
+    "react-native-gesture-handler": "~2.29.1",
+    "react-native-linking": "~0.0.0",
+    "react-native-reanimated": "~4.1.5",
+    "react-native-safe-area-context": "~5.6.2",
+    "react-native-screens": "~4.16.0",
+    "react-native-svg": "~15.12.1",
+    "react-native-uuid": "~2.0.1",
+    "react-native-web": "~0.21.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "expo": {
+    "androidManifest": {
+      "package": "com.mycompany.authapp",
+      "splash": {
+        "image": "./src/assets/splash-icon.png",
+        "resizeMode": "contain"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "category": "DEFAULT",
+          "data": [
+            {
+              "scheme": "myapp",
+              "host": "auth"
+            }
+          ],
+          "matchPathPattern": "/callback"
+        }
+      ]
+    },
+    "ios": {
+      "bundleIdentifier": "com.mycompany.authapp",
+      "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "contain"
+      }
+    }
   },
   "private": true
 }
