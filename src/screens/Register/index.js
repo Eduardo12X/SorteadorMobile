@@ -67,13 +67,6 @@ export default function Register({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.backButton}
-                onPress={() => navigation.goBack()}
-            >
-                <Text style={styles.backButtonText}>← Voltar</Text>
-            </TouchableOpacity>
-
             <Text style={styles.title}>Criar Conta</Text>
 
             <TextInput
@@ -123,6 +116,12 @@ export default function Register({ navigation }) {
                     <Text style={styles.buttonText}>Cadastrar</Text>
                 )}
             </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+            >
+                <Text style={styles.backButtonText}>Voltar</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -135,21 +134,29 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     backButton: {
-        position: 'absolute',
-        top: 50,
-        left: 20,
-        zIndex: 1,
+        alignItems: 'center',
+        backgroundColor: "#595959",
+        borderRadius: 8,
+        textAlign: "center",
+        padding: 15,
+        marginTop: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     backButtonText: {
         color: '#F2F2EB',
-        fontSize: 16,
+        fontSize: 18,
+        fontWeight: 'bold',
     },
     title: {
         fontSize: 32,
         fontWeight: 'bold',
         color: '#F2F2EB',
         textAlign: 'center',
-        marginBottom: 40,
+        marginBottom: 50,
     },
     input: {
         backgroundColor: '#252526',
@@ -166,7 +173,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 15,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 50,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,

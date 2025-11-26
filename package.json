@@ -36,7 +36,9 @@
     "react-native-web": "~0.21.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@react-native-community/cli": "latest",
+    "@react-native/metro-config": "latest"
   },
   "expo": {
     "androidManifest": {
@@ -63,7 +65,7 @@
     "ios": {
       "bundleIdentifier": "com.mycompany.authapp",
       "splash": {
-        "image": "./assets/splash.png",
+        "image": "./src/assets/splash.png",
         "resizeMode": "contain"
       }
     }

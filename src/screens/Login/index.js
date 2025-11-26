@@ -41,8 +41,7 @@ export default function Login({ navigation }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Sorteador de Números</Text>
-            <Text style={styles.subtitle}>Login</Text>
+            <Text style={styles.title}>Login</Text>
 
             <TextInput
                 style={styles.input}
@@ -74,6 +73,12 @@ export default function Login({ navigation }) {
                     <Text style={styles.buttonText}>Entrar</Text>
                 )}
             </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.backButton}
+                onPress={() => navigation.goBack()}
+            >
+                <Text style={styles.backButtonText}>Voltar</Text>
+            </TouchableOpacity>
 
             <TouchableOpacity
                 style={styles.linkButton}
@@ -88,6 +93,24 @@ export default function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+    backButton: {
+        alignItems: 'center',
+        backgroundColor: "#595959",
+        borderRadius: 8,
+        textAlign: "center",
+        padding: 15,
+        marginTop: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    backButtonText: {
+        color: '#F2F2EB',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
     container: {
         flex: 1,
         backgroundColor: '#0D0D0D',
@@ -99,7 +122,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#F2F2EB',
         textAlign: 'center',
-        marginBottom: 10,
+        marginBottom: 50,
     },
     subtitle: {
         fontSize: 24,
@@ -123,7 +146,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 15,
         alignItems: 'center',
-        marginTop: 10,
+        marginTop: 25,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -136,7 +159,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     linkButton: {
-        marginTop: 20,
+        marginTop: 50,
         alignItems: 'center',
     },
     linkText: {

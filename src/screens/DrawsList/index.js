@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+    Image,
     View,
     Text,
     TouchableOpacity,
@@ -135,7 +136,7 @@ export default function DrawsList({ navigation }) {
                 style={styles.deleteButton}
                 onPress={() => handleDeleteDraw(item.id, item.name)}
             >
-                <Text style={styles.deleteButtonText}>🗑️</Text>
+                <Image style={styles.deleteButtonIcon} source={require('../../assets/icons/trash.png')}/>
             </TouchableOpacity>
         </View>
     );
@@ -279,11 +280,15 @@ const styles = StyleSheet.create({
         top: 10,
         right: 10,
         padding: 8,
-        backgroundColor: '#dc3545',
+        backgroundColor: '#F34235',
         borderRadius: 6,
     },
-    deleteButtonText: {
+    deleteButtonIcon: {
+        alignItems: "center",
+        justifyContent: "center",
         fontSize: 18,
+        height: 32,
+        width: 32,
     },
     emptyContainer: {
         flex: 1,

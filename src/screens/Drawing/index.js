@@ -19,6 +19,7 @@ import {drawNumber} from "../../services/randomNumbers";
 import {getUserDraws, deleteDraw, updateDraw, createDraw} from '../../services/database';
 import {useAuth} from "../../contexts/authContext";
 import DrawsList from "../DrawsList";
+import CustomSwitch from "./CustomSwitch";
 
 export default function Drawing({navigation, route}) {
     const { currentUser } = useAuth();
@@ -302,13 +303,6 @@ export default function Drawing({navigation, route}) {
                 contentContainerStyle={style.content}
                 keyboardShouldPersistTaps="handled"
             >
-                <TouchableOpacity
-                    style={style.backButton}
-                    onPress={handleBack}
-                >
-                    <Text style={style.buttonText}>Voltar</Text>
-                </TouchableOpacity>
-
                 <Text style={style.title}>
                     {drawData ? drawData.name : 'Novo Sorteio'}
                 </Text>
@@ -347,13 +341,11 @@ export default function Drawing({navigation, route}) {
                     />
                 </View>
 
-                <View style={style.toggleArea}>
+                <View style={[style.toggleArea, isLargeScreen ? style.toggleAreaHorizontal : style.toggleAreaVertical ]}>
                     <Text style={style.toggleText}>Permitir Repetição</Text>
-                    <Switch
-                        onValueChange={toggleSwitch}
+                    <CustomSwitch
                         value={allowRepetition}
-                        trackColor={{ false: "#767577", true: "#228B22" }}
-                        thumbColor={allowRepetition ? "#155915" : "#f4f3f4"}
+                        onValueChange={toggleSwitch}
                     />
                 </View>
 
@@ -388,7 +380,7 @@ export default function Drawing({navigation, route}) {
                         onPress={handleSave}
                         style={[style.button, {backgroundColor: "#28a745"}]}
                     >
-                        <Text style={style.buttonText}>💾 Salvar</Text>
+                        <Text style={style.buttonText}>Salvar</Text>
                     </TouchableOpacity>
 
                     {historic.length > 0 && (
@@ -400,6 +392,13 @@ export default function Drawing({navigation, route}) {
                         </TouchableOpacity>
                     )}
                 </View>
+
+                <TouchableOpacity
+                    style={style.backButton}
+                    onPress={handleBack}
+                >
+                    <Text style={style.buttonText}>Voltar</Text>
+                </TouchableOpacity>
 
                 <View style={{height: 50}} />
             </ScrollView>
@@ -445,8 +444,8 @@ const style = StyleSheet.create({
     backButton: {
         alignSelf: "center",
         padding: 10,
-        marginBottom: 10,
-        width: "100%",
+        marginTop: 25,
+        width: "85%",
         backgroundColor: "#595959",
         borderRadius: 5,
     },
@@ -569,13 +568,22 @@ const style = StyleSheet.create({
     },
     toggleArea: {
         alignItems: "center",
+        alignSelf: "center",
         justifyContent: "center",
         marginVertical: 15,
         gap: 10,
     },
+    toggleAreaHorizontal: {
+        flexDirection: "row",
+        flexWrap: "wrap",
+    },
+    toggleAreaVertical: {
+        flexDirection: "column",
+    },
     toggleText: {
         color: "#F2F2EB",
         fontSize: 16,
+        marginHorizontal: 10,
         marginVertical: 10,
     },
     infoText: {

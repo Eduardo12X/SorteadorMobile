@@ -49,16 +49,18 @@ export default function Home({navigation}) {
                     Crie ou faça login para armazenar seus sorteios na sua conta!
                 </Text>
 
-                <TouchableOpacity style={style.button} onPress={handleStart}>
-                    <Text style={style.buttonText}>Começar</Text>
-                </TouchableOpacity>
+                <View style={style.buttons}>
+                    <TouchableOpacity style={style.button} onPress={handleStart}>
+                        <Text style={style.buttonText}>Começar</Text>
+                    </TouchableOpacity>
 
-                <TouchableOpacity
-                    style={[style.button, style.secondaryButton]}
-                    onPress={handleLogin}
-                >
-                    <Text style={style.buttonText}>Já tenho conta</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[style.button, style.secondaryButton]}
+                        onPress={handleLogin}
+                    >
+                        <Text style={style.buttonText}>Já tenho conta</Text>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </View>
     );
@@ -107,6 +109,11 @@ const style = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         textAlign: "center",
+    },
+    buttons: {
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 50,
     },
     imagesContainer: {
         marginVertical: 40,

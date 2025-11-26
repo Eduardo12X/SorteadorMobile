@@ -1,5 +1,4 @@
-import * as SQLite from "expo-sqlite";
-import {Alert, Platform} from 'react-native';
+import { Platform } from 'react-native';
 
 // Detecta se está na web
 const isWeb = Platform.OS === 'web';
@@ -7,13 +6,14 @@ const isWeb = Platform.OS === 'web';
 // Variável para SQLite (apenas mobile)
 let db = null;
 
-// Importa SQLite apenas para mobile - NOVA API
+// ⚠️ CRÍTICO: Só importa e inicializa SQLite se NÃO for web
 if (!isWeb) {
+    // Usa require() ao invés de import para carregar dinamicamente
     const SQLite = require('expo-sqlite');
     db = SQLite.openDatabaseSync('sorteador.db');
-}
-else  {
-    db = SQLite.openDatabaseSync('sorteador.db');
+    console.log('📱 SQLite inicializado (Mobile)');
+} else {
+    console.log('🌐 Web detectada - usando LocalStorage');
 }
 
 // ============ STORAGE WEB (LocalStorage) ============
